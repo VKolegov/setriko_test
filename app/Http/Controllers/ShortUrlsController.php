@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateShortUrlRequest;
 use App\Http\Requests\PaginatedRequest;
 use App\Http\Requests\UpdateShortUrlRequest;
 use App\Http\Resources\ShortUrlResource;
 use App\Http\Resources\ShortUrlsCollection;
 use App\Repositories\ShortUrlRepository;
+use Illuminate\Http\JsonResponse;
 
 class ShortUrlsController extends Controller
 {
@@ -37,6 +39,17 @@ class ShortUrlsController extends Controller
         }
 
         return new ShortUrlResource($model);
+    }
+
+    public function create(CreateShortUrlRequest $request): JsonResponse
+    {
+        $model = $this->repository->create(
+            $request->validated()
+        );
+
+        return (new ShortUrlResource($model))
+            ->response()
+            ->setStatusCode(201);
     }
 
     public function update(int $id, UpdateShortUrlRequest $request): ShortUrlResource

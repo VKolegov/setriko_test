@@ -20,11 +20,16 @@ const routes = [
     component: list,
   },
   {
-    path: '/short_urls/:id',
-    name: 'short_url',
+    path: '/short_urls/:id(\\d+)',
+    name: 'short_urls.edit',
     component: edit,
     props: true,
-  }
+  },
+  {
+    path: '/short_urls/create',
+    name: 'short_urls.create',
+    component: edit,
+  },
 ];
 
 const router = createRouter({

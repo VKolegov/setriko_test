@@ -32,7 +32,7 @@ class ShortUrl extends Model
         'hits' => 'int',
     ];
 
-    protected $guarded = ['id', 'slug'];
+    protected $guarded = ['id'];
 
     public const UPDATED_AT = null;
 }

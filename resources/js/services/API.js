@@ -1,10 +1,13 @@
 import axios from 'axios';
 
+/**
+ * @template T
+ */
 export default class API {
 
   /**
    *
-   * @type {?import('axios').AxiosInstance}
+   * @type {axios.AxiosInstance}
    */
   axios;
 
@@ -19,7 +22,12 @@ export default class API {
     });
   }
 
-  async fetch (params) {
+  /**
+   *
+   * @param {Object|null} params
+   * @returns {Promise<PaginatedResponse<T>>}
+   */
+  async fetch (params = null) {
 
     try {
       const reqParams = this.prepareFetchParams(params);

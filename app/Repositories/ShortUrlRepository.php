@@ -33,6 +33,26 @@ class ShortUrlRepository
                        ->first();
     }
 
+    public function updateModelById(int $id, array $attributes): ?ShortUrl
+    {
+        $model = ShortUrl::find($id);
+
+        if (!$model) {
+            return null;
+        }
+
+        $model->fill($attributes)->save();
+
+        // reset cache
+        if ($model->wasChanged('destination_url')) {
+            $this->taggedCache()->forget(
+                $this->getCacheKey($model->slug)
+            );
+        }
+
+        return $model;
+    }
+
     public function increaseHits(string $slug): int
     {
         return ShortUrl::query()

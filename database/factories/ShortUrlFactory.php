@@ -18,6 +18,7 @@ class ShortUrlFactory extends Factory
     {
         return [
             'slug' => fake()->unique()->bothify('???###???'),
+            'name' => fake()->words(2, true),
             'destination_url' => fake()->url,
         ];
     }

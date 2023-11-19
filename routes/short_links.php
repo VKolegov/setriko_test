@@ -6,4 +6,4 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ShortURLRedirectController;
 
-Route::get('/{shortURL:slug}', [ShortURLRedirectController::class, 'redirect']);
+Route::get('/{slug}', [ShortURLRedirectController::class, 'redirect']);

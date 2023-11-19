@@ -37,10 +37,7 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                  ->group(base_path('routes/web.php'));
 
-            Route::middleware([
-                SubstituteBindings::class,
-            ])
-                 ->prefix('l')
+            Route::prefix('l')
                  ->group(base_path('/routes/short_links.php'));
         });
     }

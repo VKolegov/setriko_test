@@ -15,4 +15,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', [IndexController::class, 'index']);
+Route::get('/{vue?}', [IndexController::class, 'index'])
+     ->where('vue', '[\/\w\.-]*');

@@ -21,6 +21,11 @@ class ShortUrlRepository
                        );
     }
 
+    public function getModelById(int $id): ?ShortUrl
+    {
+        return ShortUrl::find($id);
+    }
+
     public function getModelBySlug(string $slug): ?ShortUrl
     {
         return ShortUrl::query()

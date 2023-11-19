@@ -13,6 +13,8 @@ class ShortUrlResource extends JsonResource
      */
     public $resource;
 
+    public static $wrap = null;
+
     /**
      * Transform the resource into an array.
      *

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PaginatedRequest;
 use App\Http\Resources\ShortURLResource;
+use App\Http\Resources\ShortUrlsCollection;
 use App\Repositories\ShortURLRepository;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
@@ -16,7 +17,7 @@ class ShortURLsController extends Controller
         $this->repository = new ShortURLRepository();
     }
 
-    public function index(PaginatedRequest $request): AnonymousResourceCollection
+    public function index(PaginatedRequest $request): ShortUrlsCollection
     {
         $paginated = $this->repository->getPaginated(
             $request->get('page', 1),
@@ -24,6 +25,6 @@ class ShortURLsController extends Controller
         );
 
 
-        return ShortURLResource::collection($paginated);
+        return new ShortUrlsCollection($paginated);
     }
 }

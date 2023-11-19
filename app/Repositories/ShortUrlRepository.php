@@ -33,6 +33,18 @@ class ShortUrlRepository
                        ->first();
     }
 
+    public function create(array $attributes): ShortUrl
+    {
+        $model = ShortUrl::create($attributes);
+
+        $this->writeCache(
+            slug: $model->slug,
+            destinationUrl: $model->destination_url
+        );
+
+        return $model;
+    }
+
     public function updateModelById(int $id, array $attributes): ?ShortUrl
     {
         $model = ShortUrl::find($id);

@@ -21,7 +21,7 @@ class ShortUrlsController extends Controller
     {
         $paginated = $this->repository->getPaginated(
             $request->get('page', 1),
-            $request->get('perPage', 5),
+            $request->get('perPage', 20),
         );
 
 

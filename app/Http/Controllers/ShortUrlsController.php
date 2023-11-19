@@ -27,4 +27,15 @@ class ShortUrlsController extends Controller
 
         return new ShortUrlsCollection($paginated);
     }
+
+    public function show(int $id): ShortUrlResource
+    {
+        $model = $this->repository->getModelById($id);
+
+        if (!$model) {
+            abort(404);
+        }
+
+        return new ShortUrlResource($model);
+    }
 }

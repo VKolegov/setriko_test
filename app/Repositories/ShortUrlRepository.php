@@ -45,9 +45,7 @@ class ShortUrlRepository
 
         // reset cache
         if ($model->wasChanged('destination_url')) {
-            $this->taggedCache()->forget(
-                $this->getCacheKey($model->slug)
-            );
+            $this->resetCache($model->slug);
         }
 
         return $model;
@@ -74,11 +72,7 @@ class ShortUrlRepository
             return null;
         }
 
-        $this->taggedCache()->put(
-            key: $cacheKey,
-            value: $model->destination_url,
-            ttl: self::CACHE_TTL, // 24h
-        );
+        $this->writeCache($slug, $model->destination_url);
 
         return $model->destination_url;
     }
@@ -89,6 +83,28 @@ class ShortUrlRepository
     private function taggedCache(): TaggedCache
     {
         return Cache::tags([self::CACHE_TAG]);
+    }
+
+    private function writeCache(string $slug, string $destinationUrl): void
+    {
+        $cacheKey = $this->getCacheKey($slug);
+
+        $this->taggedCache()->put(
+            key: $cacheKey,
+            value: $destinationUrl,
+            ttl: self::CACHE_TTL
+        );
+    }
+
+    private function resetCache(?string $slug): void
+    {
+        if (!$slug) {
+            $this->taggedCache()->flush();
+        }
+
+        $this->taggedCache()->forget(
+            $this->getCacheKey($slug)
+        );
     }
 
     private function getCacheKey(string $slug): string

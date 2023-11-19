@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 /**
  * \App\Models\ShortURL
@@ -12,11 +15,11 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $destination_url Адрес для перенаправления
  * @property string|null $name Название ссылки
  * @property int $hits Количество переходов
- * @property \Illuminate\Support\Carbon|null $created_at
- * @method static \Illuminate\Database\Eloquent\Builder|ShortURL newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|ShortURL newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|ShortURL query()
- * @mixin \Eloquent
+ * @property Carbon|null $created_at
+ * @method static Builder|ShortURL newModelQuery()
+ * @method static Builder|ShortURL newQuery()
+ * @method static Builder|ShortURL query()
+ * @mixin Eloquent
  */
 class ShortURL extends Model
 {

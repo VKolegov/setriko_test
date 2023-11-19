@@ -23,6 +23,7 @@ class ShortUrlResource extends JsonResource
         return [
             'id'              => $this->resource->id,
             'slug'            => $this->resource->slug,
+            'url'             => route('short-url', ['slug' => $this->resource->slug]),
             'destination_url' => $this->resource->destination_url,
             'hits'            => $this->resource->hits,
             'name'            => $this->resource->name,

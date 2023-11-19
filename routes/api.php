@@ -24,4 +24,5 @@ Route::group([
     'prefix' => '/short_urls',
 ], static function () {
     Route::get('/', [ShortUrlsController::class, 'index']);
+    Route::get('{id}', [ShortUrlsController::class, 'show']);
 });

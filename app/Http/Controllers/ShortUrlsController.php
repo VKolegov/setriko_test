@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PaginatedRequest;
+use App\Http\Requests\UpdateShortUrlRequest;
 use App\Http\Resources\ShortUrlResource;
 use App\Http\Resources\ShortUrlsCollection;
 use App\Repositories\ShortUrlRepository;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class ShortUrlsController extends Controller
 {
@@ -20,8 +20,8 @@ class ShortUrlsController extends Controller
     public function index(PaginatedRequest $request): ShortUrlsCollection
     {
         $paginated = $this->repository->getPaginated(
-            $request->get('page', 1),
-            $request->get('perPage', 20),
+            page: $request->get('page', 1),
+            itemsPerPage: $request->get('perPage', 20),
         );
 
 
@@ -31,6 +31,20 @@ class ShortUrlsController extends Controller
     public function show(int $id): ShortUrlResource
     {
         $model = $this->repository->getModelById($id);
+
+        if (!$model) {
+            abort(404);
+        }
+
+        return new ShortUrlResource($model);
+    }
+
+    public function update(int $id, UpdateShortUrlRequest $request): ShortUrlResource
+    {
+        $model = $this->repository->updateModelById(
+            id: $id,
+            attributes: $request->validated(),
+        );
 
         if (!$model) {
             abort(404);

@@ -2,6 +2,9 @@
 import { onMounted, ref } from 'vue';
 
 import shortUrlsAPI from '@/services/short_urls.js';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
 
 const props = defineProps({
   id: {
@@ -34,9 +37,33 @@ onMounted(() => {
 });
 
 function onSubmit () {
-  shortUrlsAPI.update(props.id, shortUrl.value).then(
-      r => console.log(r)
-  );
+  if (props.id) {
+    update();
+  } else {
+    create();
+  }
+}
+
+async function update () {
+  try {
+    shortUrl.value = await shortUrlsAPI.update(props.id, shortUrl.value);
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+async function create () {
+  try {
+    shortUrl.value = await shortUrlsAPI.create(shortUrl.value);
+    await router.push({
+      name: 'short_urls.edit',
+      params: {
+        id: shortUrl.value.id,
+      }
+    });
+  } catch (e) {
+    console.error(e);
+  }
 }
 </script>
 
@@ -55,7 +82,7 @@ function onSubmit () {
           type="text"
           class="form-control"
           id="slug"
-          :disabled="shortUrl"
+          :disabled="shortUrl.id"
           v-model="shortUrl.slug"
           minlength="1"
           maxlength="16"

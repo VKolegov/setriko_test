@@ -66,7 +66,7 @@ export default class API {
   /**
    *
    * @param {object|FormData} data
-   * @return {Promise<any>}
+   * @return {Promise<T>}
    */
   async create (data) {
 
@@ -90,7 +90,7 @@ export default class API {
    *
    * @param {number} id
    * @param {object|FormData} data
-   * @return {Promise<any>}
+   * @return {Promise<T>}
    */
   async update (id, data) {
 

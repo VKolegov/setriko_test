@@ -23,6 +23,7 @@ class PaginatedRequest extends FormRequest
     {
         return [
             'page' => ['int', 'min:1'],
+            'perPage' => ['int', 'min:5'],
         ];
     }
 }

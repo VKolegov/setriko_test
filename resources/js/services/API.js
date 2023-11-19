@@ -47,7 +47,7 @@ export default class API {
    *
    * @param {number} id
    * @param {?object} params
-   * @return {Promise<Object>}
+   * @return {Promise<T>}
    */
   async fetchOne (id, params = null) {
 
@@ -95,7 +95,7 @@ export default class API {
   async update (id, data) {
 
     try {
-      const r = await this.axios.patch(id.toString(), data);
+      const r = await this.axios.put(id.toString(), data);
 
       return r.data;
     } catch (e) {

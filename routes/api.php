@@ -25,4 +25,5 @@ Route::group([
 ], static function () {
     Route::get('/', [ShortUrlsController::class, 'index']);
     Route::get('{id}', [ShortUrlsController::class, 'show']);
+    Route::put('{id}', [ShortUrlsController::class, 'update']);
 });

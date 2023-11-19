@@ -24,7 +24,7 @@ async function fetchEntities (page = 1) {
     maxPage.value = response.meta.last_page;
 
   } catch (e) {
-    throw e;
+    console.error(e);
   }
 }
 
@@ -58,11 +58,11 @@ function goToPage (n) {
   fetchEntities(n);
 }
 
-function nextPage() {
+function nextPage () {
   goToPage(currentPage.value + 1);
 }
 
-function prevPage() {
+function prevPage () {
   goToPage(currentPage.value - 1);
 }
 </script>
@@ -70,32 +70,34 @@ function prevPage() {
 <template>
   <table class="table table-hover">
     <thead>
-      <tr>
-        <th>#</th>
-        <th>Короткий ключ</th>
-        <th>Название</th>
-        <th>Ссылка</th>
-        <th>Переходов</th>
-      </tr>
+    <tr>
+      <th>#</th>
+      <th>Короткий ключ</th>
+      <th>Название</th>
+      <th>Ссылка</th>
+      <th>Переходов</th>
+    </tr>
     </thead>
     <tbody>
-      <tr v-for="url in urls" :key="url.id">
-        <td>
+    <tr v-for="url in urls" :key="url.id">
+      <td>
+        <router-link :to="{'name': 'short_url', params: {id: url.id}}">
           {{ url.id }}
-        </td>
-        <td>
-          <a :href="url.url"> {{ url.slug }} </a>
-        </td>
-        <td>
-          {{ url.name ?? '-' }}
-        </td>
-        <td>
-          <a :href="url.destination_url"> {{ url.destination_url }} </a>
-        </td>
-        <td>
-          {{ url.hits }}
-        </td>
-      </tr>
+        </router-link>
+      </td>
+      <td>
+        <a :href="url.url"> {{ url.slug }} </a>
+      </td>
+      <td>
+        {{ url.name ?? '-' }}
+      </td>
+      <td>
+        <a :href="url.destination_url"> {{ url.destination_url }} </a>
+      </td>
+      <td>
+        {{ url.hits }}
+      </td>
+    </tr>
     </tbody>
   </table>
 

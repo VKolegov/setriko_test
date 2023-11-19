@@ -5,11 +5,28 @@ namespace App\Repositories;
 use App\Models\ShortURL;
 use Cache;
 use Illuminate\Cache\TaggedCache;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class ShortURLRepository
 {
     public const CACHE_TAG = 'short_links';
     public const CACHE_TTL = 86400; // 24h
+
+    public function getPaginated(int $page = 1, int $itemsPerPage = 20): LengthAwarePaginator
+    {
+        return ShortURL::query()
+                       ->paginate(
+                           perPage: $itemsPerPage,
+                           page: $page
+                       );
+    }
+
+    public function getModelBySlug(string $slug): ?ShortURL
+    {
+        return ShortURL::query()
+                       ->where('slug', $slug)
+                       ->first();
+    }
 
     public function increaseHits(string $slug): int
     {
@@ -39,13 +56,6 @@ class ShortURLRepository
         );
 
         return $model->destination_url;
-    }
-
-    public function getModelBySlug(string $slug): ?ShortURL
-    {
-        return ShortURL::query()
-                       ->where('slug', $slug)
-                       ->first();
     }
 
     /*

@@ -3,10 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\ShortURL;
+use App\Repositories\ShortURLRepository;
 use Illuminate\Http\RedirectResponse;
 
 class ShortURLRedirectController extends Controller
 {
+    private ShortURLRepository $repository;
+
+    public function __construct()
+    {
+        $this->repository = new ShortURLRepository();
+    }
+
     public function redirect(string $slug): RedirectResponse
     {
         // cache for faster response time
@@ -15,9 +23,7 @@ class ShortURLRedirectController extends Controller
         if ($destinationURL = \Cache::get($cacheKey)) {
 
             // TODO: in a job
-            ShortURL::query()
-                    ->where('slug', $slug)
-                    ->increment('hits');
+            $this->repository->increaseHits($slug);
 
             return redirect($destinationURL);
         }
@@ -36,8 +42,8 @@ class ShortURLRedirectController extends Controller
             ttl: 86400 // 24h
         );
 
-        $model->hits++;
-        $model->save();
+        // TODO: in a job
+        $this->repository->increaseHits($slug);
 
         return redirect(
             $model->destination_url

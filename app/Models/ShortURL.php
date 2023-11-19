@@ -13,7 +13,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $name Название ссылки
  * @property int $hits Количество переходов
  * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|ShortURL newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ShortURL newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ShortURL query()
@@ -28,4 +27,6 @@ class ShortURL extends Model
     ];
 
     protected $guarded = ['id', 'slug'];
+
+    public const UPDATED_AT = null;
 }

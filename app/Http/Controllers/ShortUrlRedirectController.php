@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\ShortURLRepository;
+use App\Repositories\ShortUrlRepository;
 use Illuminate\Http\RedirectResponse;
 
-class ShortURLRedirectController extends Controller
+class ShortUrlRedirectController extends Controller
 {
-    private ShortURLRepository $repository;
+    private ShortUrlRepository $repository;
 
     public function __construct()
     {
-        $this->repository = new ShortURLRepository();
+        $this->repository = new ShortUrlRepository();
     }
 
     public function redirect(string $slug): RedirectResponse

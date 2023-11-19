@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 
 /**
- * \App\Models\ShortURL
+ * \App\Models\ShortUrl
  *
  * @property int $id
  * @property string $slug Короткий ключ
@@ -17,12 +17,12 @@ use Illuminate\Support\Carbon;
  * @property string|null $name Название ссылки
  * @property int $hits Количество переходов
  * @property Carbon|null $created_at
- * @method static Builder|ShortURL newModelQuery()
- * @method static Builder|ShortURL newQuery()
- * @method static Builder|ShortURL query()
+ * @method static Builder|ShortUrl newModelQuery()
+ * @method static Builder|ShortUrl newQuery()
+ * @method static Builder|ShortUrl query()
  * @mixin Eloquent
  */
-class ShortURL extends Model
+class ShortUrl extends Model
 {
     use HasFactory;
 

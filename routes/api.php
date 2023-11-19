@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ShortURLsController;
+use App\Http\Controllers\ShortUrlsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,5 +23,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group([
     'prefix' => '/short_urls',
 ], static function () {
-    Route::get('/', [ShortURLsController::class, 'index']);
+    Route::get('/', [ShortUrlsController::class, 'index']);
 });

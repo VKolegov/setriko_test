@@ -2,7 +2,7 @@ import API from './API.js';
 
 /**
  *
- * @type {API<ShortURL>}
+ * @type {API<ShortUrl>}
  */
 const shortUrlsAPI = new API('/api/short_urls');
 

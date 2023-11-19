@@ -3,18 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PaginatedRequest;
-use App\Http\Resources\ShortURLResource;
+use App\Http\Resources\ShortUrlResource;
 use App\Http\Resources\ShortUrlsCollection;
-use App\Repositories\ShortURLRepository;
+use App\Repositories\ShortUrlRepository;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
-class ShortURLsController extends Controller
+class ShortUrlsController extends Controller
 {
-    private ShortURLRepository $repository;
+    private ShortUrlRepository $repository;
 
     public function __construct()
     {
-        $this->repository = new ShortURLRepository();
+        $this->repository = new ShortUrlRepository();
     }
 
     public function index(PaginatedRequest $request): ShortUrlsCollection

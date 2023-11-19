@@ -1,4 +1,4 @@
-export interface ShortURL {
+export interface ShortUrl {
     id: number;
     slug: string;
     destination_url: string;

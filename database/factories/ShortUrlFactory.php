@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Helpers\SlugGenerator;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,7 @@ class ShortUrlFactory extends Factory
     public function definition(): array
     {
         return [
-            'slug' => fake()->unique()->bothify('???###???'),
+            'slug' => fake()->unique()->bothify('?#?'),
             'name' => fake()->words(2, true),
             'destination_url' => fake()->url,
         ];

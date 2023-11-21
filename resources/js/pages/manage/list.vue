@@ -81,7 +81,7 @@ function prevPage () {
     <tbody>
     <tr v-for="url in urls" :key="url.id">
       <td>
-        <router-link :to="{'name': 'short_urls.edit', params: {id: url.id}}">
+        <router-link :to="{'name': 'edit', params: {id: url.id}}">
           {{ url.id }}
         </router-link>
       </td>

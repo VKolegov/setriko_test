@@ -56,7 +56,7 @@ async function create () {
   try {
     shortUrl.value = await shortUrlsAPI.create(shortUrl.value);
     await router.push({
-      name: 'short_urls.edit',
+      name: 'edit',
       params: {
         id: shortUrl.value.id,
       }

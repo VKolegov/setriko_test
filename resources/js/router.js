@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router/dist/vue-router';
 
 import index from '@/pages/index.vue';
-import list from '@/pages/short_urls/list.vue';
-import edit from '@/pages/short_urls/edit.vue';
+import list from '@/pages/manage/list.vue';
+import edit from '@/pages/manage/edit.vue';
 
 /**
  *
@@ -15,19 +15,19 @@ const routes = [
     component: index,
   },
   {
-    path: '/short_urls',
-    name: 'short_urls',
+    path: '/manage',
+    name: 'manage',
     component: list,
   },
   {
-    path: '/short_urls/:id(\\d+)',
-    name: 'short_urls.edit',
+    path: '/manage/:id(\\d+)',
+    name: 'edit',
     component: edit,
     props: true,
   },
   {
-    path: '/short_urls/create',
-    name: 'short_urls.create',
+    path: '/manage/create',
+    name: 'create',
     component: edit,
   },
 ];

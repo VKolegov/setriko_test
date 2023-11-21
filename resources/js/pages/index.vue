@@ -18,7 +18,7 @@ async function createUrl (url) {
   });
 
   await router.push({
-    name: 'short_urls.edit',
+    name: 'edit',
     params: {
       id: shortUrl.id,
     }

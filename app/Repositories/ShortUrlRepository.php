@@ -16,6 +16,7 @@ class ShortUrlRepository
     public function getPaginated(int $page = 1, int $itemsPerPage = 20): LengthAwarePaginator
     {
         return ShortUrl::query()
+                       ->orderBy('id', 'desc')
                        ->paginate(
                            perPage: $itemsPerPage,
                            page: $page

@@ -103,13 +103,27 @@ async function generateSlug () {
             maxlength="16"
         >
         <button
-            :disabled="shortUrl.id"
+            v-if="!shortUrl.id"
             type="button"
             class="btn btn-outline-secondary"
             @click="generateSlug"
         >
           🎲
         </button>
+        <span
+            v-if="!shortUrl.id"
+            class="input-group-text"
+        >
+          Длина:
+        </span>
+        <input
+            v-if="!shortUrl.id"
+            type="number"
+            class="form-control length-input"
+            v-model="slugLength"
+            min="3"
+            max="16"
+        >
       </div>
     </div>
 
@@ -137,10 +151,11 @@ async function generateSlug () {
         Ссылка
       </label>
       <input
-          type="text"
+          type="url"
           class="form-control"
           id="url"
           v-model="shortUrl.destination_url"
+          required
       >
     </div>
 
@@ -151,5 +166,7 @@ async function generateSlug () {
 </template>
 
 <style scoped>
-
+.length-input {
+  max-width: 64px;
+}
 </style>

@@ -117,6 +117,7 @@ function prevPage () {
           min="1"
           :max="maxPage"
       >
+      <span class="input-group-text"> / {{ maxPage }}</span>
       <button
           :disabled="currentPage === maxPage"
           type="button"

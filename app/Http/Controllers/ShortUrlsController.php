@@ -45,8 +45,12 @@ class ShortUrlsController extends Controller
 
     public function create(CreateShortUrlRequest $request): JsonResponse
     {
+        $data = $request->validated();
+
         $model = $this->repository->create(
-            $request->validated()
+            url: $data['destination_url'],
+            slug: $data['slug'] ?? null,
+            name: $data['name'] ?? null,
         );
 
         return (new ShortUrlResource($model))

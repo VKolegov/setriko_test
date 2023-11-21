@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Helpers\SlugGenerator;
 use App\Models\ShortUrl;
 use Cache;
 use Illuminate\Cache\TaggedCache;
@@ -9,8 +10,8 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class ShortUrlRepository
 {
-    public const CACHE_TAG = 'short_links';
-    public const CACHE_TTL = 86400; // 24h
+    public const  CACHE_TAG = 'short_links';
+    public const  CACHE_TTL = 86400; // 24h
 
     public function getPaginated(int $page = 1, int $itemsPerPage = 20): LengthAwarePaginator
     {
@@ -33,9 +34,17 @@ class ShortUrlRepository
                        ->first();
     }
 
-    public function create(array $attributes): ShortUrl
+    public function create(string $url, ?string $slug = null, ?string $name = null): ShortUrl
     {
-        $model = ShortUrl::create($attributes);
+        if (!$slug) {
+            $slug = (new SlugGenerator())->generate();
+        }
+
+        $model = ShortUrl::create([
+            'destination_url' => $url,
+            'slug'            => $slug,
+            'name'            => $name
+        ]);
 
         $this->writeCache(
             slug: $model->slug,

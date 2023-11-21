@@ -67,9 +67,8 @@ async function create () {
   }
 }
 
-function copyLinkToClipboard () {
-  copyToClipboard(shortUrl.value.url);
-
+async function copyLinkToClipboard () {
+  await copyToClipboard(shortUrl.value.url);
   alert('Скопировано: ' + shortUrl.value.url);
 }
 

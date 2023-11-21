@@ -1,3 +1,9 @@
+/**
+ *
+ * @param {string} textToCopy
+ * @returns {Promise<void>}
+ * @credits https://stackoverflow.com/a/65996386
+ */
 export async function copyToClipboard(textToCopy) {
   // Navigator clipboard api needs a secure context (https)
   if (navigator.clipboard && window.isSecureContext) {

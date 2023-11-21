@@ -14,7 +14,7 @@ const props = defineProps({
 
 /**
  *
- * @type {import('vue').Ref<ShortUrl>}
+ * @type {import('vue').Ref<ShortUrl | ShortUrlCreateData | ShortUrlUpdateData>}
  */
 const shortUrl = ref({});
 
@@ -72,7 +72,7 @@ slug generation
 
 const slugLength = ref(3);
 
-async function generateSlug() {
+async function generateSlug () {
   try {
     shortUrl.value.slug = await shortUrlsAPI.getFreeSlug(slugLength.value);
   } catch (e) {

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 /**
- * @template T
+ * @template T,CreateData,UpdateData
  */
 export default class API {
 
@@ -65,7 +65,7 @@ export default class API {
 
   /**
    *
-   * @param {object|FormData} data
+   * @param {CreateData|FormData} data
    * @return {Promise<T>}
    */
   async create (data) {
@@ -89,7 +89,7 @@ export default class API {
   /**
    *
    * @param {number} id
-   * @param {object|FormData} data
+   * @param {UpdateData|FormData} data
    * @return {Promise<T>}
    */
   async update (id, data) {

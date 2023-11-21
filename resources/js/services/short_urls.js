@@ -1,7 +1,7 @@
 import API from './API.js';
 
 /**
- * @extends {API<ShortUrl>}
+ * @extends {API<ShortUrl, ShortUrlCreateData, ShortUrlUpdateData>}
  */
 class ShortUrlsAPI extends API {
   /**

@@ -27,10 +27,10 @@ docker run --rm \
 echo "Executing Laravel Sail..."
 vendor/bin/sail up -d
 
-echo "Installing composer dependencies"
-vendor/bin/sail composer install
 echo "Waiting 10 seconds for mysql..."
 sleep 10
+echo "Generating app key"
+vendor/bin/sail artisan key:generate
 echo "Migrating database"
 vendor/bin/sail artisan migrate
 echo "Seeding database"

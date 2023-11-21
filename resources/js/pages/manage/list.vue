@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted, ref } from 'vue';
+import { onMounted, ref } from 'vue';
 
 import short_urls from '@/services/short_urls.js';
 
@@ -36,24 +36,20 @@ onMounted(() => {
 pagination
  */
 
+const futurePage = ref(1);
 const currentPage = ref(1);
 const maxPage = ref(1);
 
-const pages = computed(() => {
-  const arr = new Array(maxPage.value);
-
-  for (let i = 0; i < maxPage.value; i++) {
-    arr[i] = i + 1;
-  }
-
-  return arr;
-});
+function onSelectPageSubmit () {
+  goToPage(futurePage.value);
+}
 
 function goToPage (n) {
 
   if (n < 1) {
     n = 1;
   }
+  futurePage.value = n;
 
   fetchEntities(n);
 }
@@ -92,7 +88,7 @@ function prevPage () {
         {{ url.name ?? '-' }}
       </td>
       <td>
-        <a :href="url.destination_url"> {{ url.destination_url }} </a>
+        <a :href="url.destination_url" target="_blank"> {{ url.destination_url }} </a>
       </td>
       <td>
         {{ url.hits }}
@@ -101,34 +97,40 @@ function prevPage () {
     </tbody>
   </table>
 
-  <nav>
-    <ul class="pagination">
-      <li
-          class="page-item"
-          :class="{'disabled': currentPage === 1}"
+  <form
+      class="list-nav"
+      @submit.prevent="onSelectPageSubmit"
+  >
+    <div class="input-group mb-3">
+      <button
+          :disabled="currentPage === 1"
+          type="button"
+          class="btn btn-primary"
+          @click="prevPage"
       >
-        <a class="page-link" @click="prevPage">Назад</a>
-      </li>
-      <li
-          v-for="page in pages"
-          :key="page"
-          class="page-item"
-          :class="{'active': currentPage === page}"
+        Назад
+      </button>
+      <input
+          type="number"
+          class="form-control"
+          v-model="futurePage"
+          min="1"
+          :max="maxPage"
       >
-        <a class="page-link" @click="goToPage(page)">{{ page }}</a>
-      </li>
-      <li
-          class="page-item"
-          :class="{'disabled': currentPage === maxPage}"
+      <button
+          :disabled="currentPage === maxPage"
+          type="button"
+          class="btn btn-primary"
+          @click="nextPage"
       >
-        <a class="page-link" @click="nextPage">Вперед</a>
-      </li>
-    </ul>
-  </nav>
+        Вперед
+      </button>
+    </div>
+  </form>
 </template>
 
 <style scoped>
-.page-link {
-  cursor: pointer;
+.list-nav {
+  padding: 50px 0;
 }
 </style>

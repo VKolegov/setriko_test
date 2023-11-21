@@ -11,7 +11,11 @@ class ShortUrlsAPI extends API {
    */
   async getFreeSlug (length = 3) {
     try {
-      const r = await this.axios.get('free_slug');
+      const r = await this.axios.get('free_slug', {
+        params: {
+          length
+        }
+      });
 
       return r.data;
     } catch (e) {

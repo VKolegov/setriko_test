@@ -6,6 +6,7 @@ use App\Models\ShortUrl;
 
 class SlugGenerator
 {
+    public const  MAX_CHARS  = 16;
     private const SLUG_CHARS = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_';
 
     private int $length;

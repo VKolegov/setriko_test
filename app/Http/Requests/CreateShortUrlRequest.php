@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Helpers\SlugGenerator;
 use App\Models\ShortUrl;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -24,9 +25,13 @@ class CreateShortUrlRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'slug'            => ['required', 'alpha_num', 'max:64', Rule::unique(ShortUrl::class, 'slug')],
+            'slug'            => [
+                'alpha_num',
+                'max:' . SlugGenerator::MAX_CHARS,
+                Rule::unique(ShortUrl::class, 'slug')
+            ],
             'name'            => ['string', 'max:255'],
-            'destination_url' => ['required', 'string', 'url'],
+            'destination_url' => ['required', 'url', 'max:2048'],
         ];
     }
 }

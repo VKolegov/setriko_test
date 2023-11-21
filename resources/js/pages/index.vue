@@ -27,27 +27,35 @@ async function createUrl (url) {
 </script>
 
 <template>
-  <form
-      @submit.prevent="onSubmit"
-  >
-    <div class="mb-3">
-      <label
-          for="url"
-          class="form-label"
-      >
-        Введите ссылку, чтобы её сократить
-      </label>
-      <input
-          type="text"
-          class="form-control"
-          id="url"
-          v-model="url"
-          maxlength="2048"
-      >
-    </div>
+  <section class="main-page">
+    <form
+        @submit.prevent="onSubmit"
+    >
+      <div class="mb-3">
+        <label
+            for="url"
+            class="form-label"
+        >
+          Введите ссылку, чтобы её сократить
+        </label>
+        <input
+            type="text"
+            class="form-control"
+            id="url"
+            v-model="url"
+            maxlength="2048"
+        >
+      </div>
 
-    <button type="submit" class="btn btn-primary">
-      Сохранить
-    </button>
-  </form>
+      <button type="submit" class="btn btn-primary">
+        Сохранить
+      </button>
+    </form>
+  </section>
 </template>
+
+<style scoped>
+.main-page {
+  padding: 50px 80px;
+}
+</style>

@@ -1,8 +1,9 @@
 <script setup>
 import { onMounted, ref, watch } from 'vue';
+import { useRouter } from 'vue-router';
 
 import shortUrlsAPI from '@/services/short_urls.js';
-import { useRouter } from 'vue-router';
+import { copyToClipboard } from '@/pages/utils.js';
 
 const router = useRouter();
 
@@ -66,6 +67,12 @@ async function create () {
   }
 }
 
+function copyLinkToClipboard () {
+  copyToClipboard(shortUrl.value.url);
+
+  alert('Скопировано: ' + shortUrl.value.url);
+}
+
 /*
 routing
  */
@@ -95,6 +102,35 @@ async function generateSlug () {
   <form
       @submit.prevent="onSubmit"
   >
+
+    <div
+        v-if="shortUrl.id"
+        class="mb-3"
+    >
+      <label
+          for="url"
+          class="form-label"
+      >
+        Короткая ссылка
+      </label>
+      <div class="input-group">
+        <input
+            disabled
+            type="url"
+            class="form-control"
+            id="url"
+            :value="shortUrl.url"
+        >
+        <button
+            type="button"
+            class="btn btn-primary"
+            @click="copyLinkToClipboard"
+        >
+          Скопировать
+        </button>
+      </div>
+    </div>
+
     <div class="mb-3">
       <label
           for="slug"

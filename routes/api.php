@@ -24,7 +24,11 @@ Route::group([
     'prefix' => '/short_urls',
 ], static function () {
     Route::get('/', [ShortUrlsController::class, 'index']);
-    Route::get('{id}', [ShortUrlsController::class, 'show']);
+    Route::get('{id}', [ShortUrlsController::class, 'show'])
+        ->where('id', '[0-9]+');
     Route::post('/', [ShortUrlsController::class, 'create']);
-    Route::put('{id}', [ShortUrlsController::class, 'update']);
+    Route::put('{id}', [ShortUrlsController::class, 'update'])
+        ->where('id', '[0-9]+');
+
+    Route::get('free_slug', [ShortUrlsController::class, 'getFreeSlug']);
 });

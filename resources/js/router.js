@@ -40,7 +40,7 @@ export const routes = [
     component: edit,
     meta: {
       title: 'Создание',
-    }
+    },
   },
 ];
 

@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 
 import shortUrlsAPI from '@/services/short_urls.js';
 import { useRouter } from 'vue-router';
@@ -65,6 +65,16 @@ async function create () {
     console.error(e);
   }
 }
+
+/*
+routing
+ */
+
+watch(() => router.currentRoute.value.params.id, newId => {
+  if (!newId) {
+    shortUrl.value = {};
+  }
+});
 
 /*
 slug generation

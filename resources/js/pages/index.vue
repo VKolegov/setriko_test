@@ -53,9 +53,3 @@ async function createUrl (url) {
     </form>
   </section>
 </template>
-
-<style scoped>
-.main-page {
-  padding: 50px 80px;
-}
-</style>

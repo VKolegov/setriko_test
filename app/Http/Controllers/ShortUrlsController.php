@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\SlugGenerator;
 use App\Http\Requests\CreateShortUrlRequest;
 use App\Http\Requests\PaginatedRequest;
 use App\Http\Requests\UpdateShortUrlRequest;
@@ -9,6 +10,7 @@ use App\Http\Resources\ShortUrlResource;
 use App\Http\Resources\ShortUrlsCollection;
 use App\Repositories\ShortUrlRepository;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class ShortUrlsController extends Controller
 {
@@ -64,5 +66,16 @@ class ShortUrlsController extends Controller
         }
 
         return new ShortUrlResource($model);
+    }
+
+    public function getFreeSlug(Request $r): string
+    {
+        $r->validate([
+            'length' => ['int', 'min:3', 'max:16']
+        ]);
+
+        return (new SlugGenerator(
+            $r->get('length', 3)
+        ))->generate();
     }
 }

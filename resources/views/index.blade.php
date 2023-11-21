@@ -10,8 +10,11 @@
     <title>Setrico URL Shortener</title>
 </head>
 <body>
-<div id="app" class="container">
-    <router-view></router-view>
+<div id="app">
+    <nav-menu></nav-menu>
+    <div class="container">
+        <router-view></router-view>
+    </div>
 </div>
 </body>
 @vite(['resources/js/app.js'])

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+trap "exit" INT
+
 if ! [ -f ".env" ]; then
   echo ".env file not found, copying from .env.example"
   cp ".env.example" ".env"
@@ -28,7 +30,7 @@ vendor/bin/sail up -d
 echo "Installing composer dependencies"
 vendor/bin/sail composer install
 echo "Waiting 10 seconds for mysql..."
-sleep(10)
+sleep 10
 echo "Migrating database"
 vendor/bin/sail artisan migrate
 echo "Seeding database"

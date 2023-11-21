@@ -65,6 +65,20 @@ async function create () {
     console.error(e);
   }
 }
+
+/*
+slug generation
+ */
+
+const slugLength = ref(3);
+
+async function generateSlug() {
+  try {
+    shortUrl.value.slug = await shortUrlsAPI.getFreeSlug(slugLength.value);
+  } catch (e) {
+    console.error(e);
+  }
+}
 </script>
 
 <template>
@@ -78,16 +92,27 @@ async function create () {
       >
         Короткий ключ
       </label>
-      <input
-          type="text"
-          class="form-control"
-          id="slug"
-          :disabled="shortUrl.id"
-          v-model="shortUrl.slug"
-          minlength="1"
-          maxlength="16"
-      >
+      <div class="input-group">
+        <input
+            type="text"
+            class="form-control"
+            id="slug"
+            :disabled="shortUrl.id"
+            v-model="shortUrl.slug"
+            minlength="1"
+            maxlength="16"
+        >
+        <button
+            :disabled="shortUrl.id"
+            type="button"
+            class="btn btn-outline-secondary"
+            @click="generateSlug"
+        >
+          🎲
+        </button>
+      </div>
     </div>
+
 
     <div class="mb-3">
       <label

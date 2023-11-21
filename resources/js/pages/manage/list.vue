@@ -64,7 +64,7 @@ function prevPage () {
 </script>
 
 <template>
-  <table class="table table-hover">
+  <table class="table table-hover table-sm">
     <thead>
     <tr>
       <th>#</th>
@@ -82,7 +82,7 @@ function prevPage () {
         </router-link>
       </td>
       <td>
-        <a :href="url.url"> {{ url.slug }} </a>
+        <a :href="url.url" target="_blank"> {{ url.slug }} </a>
       </td>
       <td>
         {{ url.name ?? '-' }}
